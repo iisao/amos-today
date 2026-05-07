@@ -1,0 +1,52 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const siteTitle = "Amos — 樂創媒體";
+const fullTitle = title ? `${title}｜${siteTitle}` : siteTitle;
+const desc = description ?? "我用結構說故事，用故事推進。Amos 的個人作品集與觀點站。";
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="border-b border-neutral-200">
+      <div class="mx-auto max-w-3xl px-6 py-6 flex items-center justify-between text-sm">
+        <a href="/" class="font-medium no-underline hover:opacity-70">amos.today</a>
+        <nav class="flex gap-6">
+          <a href="/work" class="no-underline hover:opacity-70">Work</a>
+          <a href="/writing" class="no-underline hover:opacity-70">Writing</a>
+          <a href="/about" class="no-underline hover:opacity-70">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="border-t border-neutral-200 mt-24">
+      <div class="mx-auto max-w-3xl px-6 py-8 text-sm text-neutral-500 flex flex-col sm:flex-row gap-2 justify-between">
+        <span>© {new Date().getFullYear()} Amos · 樂創媒體</span>
+        <span>
+          <a href="mailto:amos@za.media" class="no-underline hover:text-neutral-900">amos@za.media</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

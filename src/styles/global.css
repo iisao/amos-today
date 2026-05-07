@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family:
+      ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", "Noto Sans TC",
+      "PingFang TC", "Microsoft JhengHei", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-white text-neutral-900;
+  }
+
+  a {
+    @apply underline decoration-neutral-300 decoration-1 underline-offset-4 transition-colors hover:decoration-neutral-900;
+  }
+}
