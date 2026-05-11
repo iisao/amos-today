@@ -124,10 +124,27 @@ function pageToProject(page: any): Project | null {
   };
 }
 
+// @notionhq/client v5 split query off `databases` onto `dataSources`.
+// Each database has one+ data sources; resolve once and cache the id per db.
+const dataSourceCache = new Map<string, string>();
+
+async function resolveDataSourceId(databaseId: string): Promise<string> {
+  if (!notion) throw new Error("Notion client not initialized");
+  const cached = dataSourceCache.get(databaseId);
+  if (cached) return cached;
+  const db = await notion.databases.retrieve({ database_id: databaseId });
+  const sources = (db as any).data_sources as { id: string; name: string }[] | undefined;
+  if (!sources?.[0]) throw new Error(`Database ${databaseId} has no data sources`);
+  const id = sources[0].id;
+  dataSourceCache.set(databaseId, id);
+  return id;
+}
+
 export async function getPosts(): Promise<Post[]> {
   if (!notion) return [];
-  const res = await notion.databases.query({
-    database_id: postsDbId,
+  const data_source_id = await resolveDataSourceId(postsDbId);
+  const res = await notion.dataSources.query({
+    data_source_id,
     filter: { property: "Status", select: { equals: "Published" } },
     sorts: [{ property: "Published Date", direction: "descending" }],
   });
@@ -141,8 +158,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 export async function getProjects(): Promise<Project[]> {
   if (!notion) return [];
-  const res = await notion.databases.query({
-    database_id: projectsDbId,
+  const data_source_id = await resolveDataSourceId(projectsDbId);
+  const res = await notion.dataSources.query({
+    data_source_id,
     filter: {
       or: [
         { property: "Status", select: { equals: "Public" } },
