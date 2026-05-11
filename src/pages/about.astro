@@ -3,21 +3,102 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="關於 Amos" description="關於 Amos：策劃、寫作、執行。樂創媒體創辦人。">
-  <section class="mx-auto max-w-3xl px-6 pt-24 pb-16">
+  <article class="mx-auto max-w-3xl px-6 pt-24 pb-24">
     <h1 class="text-3xl sm:text-4xl font-medium leading-tight tracking-tight">
       關於我
     </h1>
-    <div class="mt-10 prose prose-neutral max-w-none text-base leading-relaxed">
+
+    <div class="mt-10 text-base leading-relaxed text-neutral-800 space-y-5">
+      <p>我是 Amos，樂創媒體（LAFUN）的創辦人。</p>
       <p>
-        我是 Amos，樂創媒體（LAFUN）的創辦人兼執行長。
+        我在策劃、寫作與執行的交界處工作。經手的事情橫跨提案開發、標案撰寫、品牌與內容策略、活動策展與體驗設計、政府與地方創生專案，以及自有 IP 的籌備與營運。
       </p>
-      <p>
-        我在策劃、寫作、與執行的交界處工作。過去的經驗橫跨提案開發、品牌策略、內容製作、活動策展、政府專案、地方創生與媒體溝通。
+      <p class="font-medium text-neutral-900">
+        我不容易被單一職稱框住，但工作有一個共同點——我擅長處理「中間段」：構想已經出現、但執行還沒拼起來的階段。
       </p>
-      <p>
-        這個網站是我的觀點站與作品集。如果你正在思考一件複雜的事，我可能可以幫上忙。
-      </p>
-      <p class="text-neutral-500 italic">（更詳細的版本即將上線）</p>
     </div>
-  </section>
+
+    <section class="mt-16 pt-10 border-t border-neutral-200">
+      <h2 class="text-xl sm:text-2xl font-medium tracking-tight">
+        為什麼是「結構」與「故事」
+      </h2>
+      <div class="mt-6 text-base leading-relaxed text-neutral-800 space-y-4">
+        <p>這兩個字看起來相反，其實是同一件事的兩面。</p>
+        <ul class="space-y-2 pl-1">
+          <li>
+            <strong class="font-medium">結構</strong>讓事情能站立、能執行、能讓別人接得住
+          </li>
+          <li>
+            <strong class="font-medium">故事</strong>讓人願意參與、讓努力被看見、讓決策變得明確
+          </li>
+        </ul>
+        <p>缺一個都會卡。我做的事，幾乎都在這兩條軸線之間找平衡。</p>
+      </div>
+    </section>
+
+    <section class="mt-16 pt-10 border-t border-neutral-200">
+      <h2 class="text-xl sm:text-2xl font-medium tracking-tight">
+        我目前在做的事
+      </h2>
+      <ul class="mt-6 text-base leading-relaxed text-neutral-800 space-y-3 pl-1">
+        <li>
+          經營樂創媒體與旗下幾條產品線——其中包括宜蘭外澳的「玩海人」市集、三星的「遛遛．三星」社區品牌
+        </li>
+        <li>
+          接政府委託案與民間提案，主場是文化、地方、創生、策展類題目
+        </li>
+        <li>
+          探索 AI 進入專業工作流的方式（個人加速、團隊協作、組織治理）
+        </li>
+      </ul>
+    </section>
+
+    <section class="mt-16 pt-10 border-t border-neutral-200">
+      <h2 class="text-xl sm:text-2xl font-medium tracking-tight">
+        給可能想合作的人
+      </h2>
+      <div class="mt-6 text-base leading-relaxed text-neutral-800 space-y-4">
+        <p>如果你正在處理一件：</p>
+        <ul class="space-y-2 pl-1 list-disc list-inside marker:text-neutral-400">
+          <li>複雜得不好說、又必須說清楚的事</li>
+          <li>需要把不同利害關係人推往同一個方向</li>
+          <li>構想有了但團隊還沒拼起來</li>
+          <li>最後得交付一個能被執行的成果</li>
+        </ul>
+        <p>
+          可以寫信給我：<a
+            href="mailto:amos@za.media"
+            class="underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900"
+            >amos@za.media</a
+          >
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-16 pt-10 border-t border-neutral-200">
+      <h2 class="text-xl sm:text-2xl font-medium tracking-tight">
+        給只是路過想看看的人
+      </h2>
+      <ul class="mt-6 text-base leading-relaxed text-neutral-800 space-y-2 pl-1">
+        <li>
+          看 <a href="/work" class="underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900">作品</a>——過往專案、提案、產品線
+        </li>
+        <li>
+          讀 <a href="/writing" class="underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900">文章</a>——對策略、敘事、執行的觀察筆記
+        </li>
+      </ul>
+    </section>
+
+    <footer class="mt-16 pt-8 border-t border-neutral-200 text-sm text-neutral-500">
+      <p>
+        這個網站是用 Astro 寫的，內容透過 Notion 同步。資料、決策、版本紀錄都公開在
+        <a
+          href="https://github.com/iisao/amos-today"
+          class="underline decoration-neutral-300 underline-offset-4 hover:text-neutral-900 hover:decoration-neutral-900"
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a
+        >。
+      </p>
+    </footer>
+  </article>
 </BaseLayout>

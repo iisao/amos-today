@@ -1,11 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPosts, getFeaturedProjects, formatDate } from "../lib/notion";
+
+const [allPosts, featured] = await Promise.all([getPosts(), getFeaturedProjects()]);
+const latestPosts = allPosts.slice(0, 3);
 ---
 
 <BaseLayout>
   <section class="mx-auto max-w-3xl px-6 pt-24 pb-16">
     <h1 class="text-4xl sm:text-5xl font-medium leading-tight tracking-tight">
-      我用結構說故事，<br />用故事推進。
+      我用結構說故事,<br />用故事推進。
     </h1>
     <p class="mt-6 text-base text-neutral-500">
       Amos — 策劃、寫作、執行。
@@ -17,7 +21,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="text-sm font-medium uppercase tracking-wider text-neutral-500">最新文章</h2>
       <a href="/writing" class="text-sm">所有文章 →</a>
     </div>
-    <p class="text-neutral-500 text-sm italic">（文章即將上線）</p>
+    {latestPosts.length === 0 ? (
+      <p class="text-neutral-500 text-sm italic">（文章即將上線）</p>
+    ) : (
+      <ul class="space-y-5">
+        {latestPosts.map((post) => (
+          <li>
+            <a href={`/writing/${post.slug}`} class="block no-underline group">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="text-base font-medium group-hover:opacity-70">{post.title}</h3>
+                <span class="text-xs text-neutral-500 shrink-0">{formatDate(post.publishedDate)}</span>
+              </div>
+              {post.excerpt && <p class="mt-1 text-sm text-neutral-500 line-clamp-2">{post.excerpt}</p>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-12 border-t border-neutral-200">
@@ -25,6 +45,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="text-sm font-medium uppercase tracking-wider text-neutral-500">精選作品</h2>
       <a href="/work" class="text-sm">所有作品 →</a>
     </div>
-    <p class="text-neutral-500 text-sm italic">（作品即將上線）</p>
+    {featured.length === 0 ? (
+      <p class="text-neutral-500 text-sm italic">（作品即將上線）</p>
+    ) : (
+      <ul class="space-y-5">
+        {featured.map((proj) => (
+          <li>
+            <a href={`/work/${proj.slug}`} class="block no-underline group">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="text-base font-medium group-hover:opacity-70">{proj.title}</h3>
+                <span class="text-xs text-neutral-500 shrink-0">{proj.year ?? ""}</span>
+              </div>
+              {proj.summary && <p class="mt-1 text-sm text-neutral-500 line-clamp-2">{proj.summary}</p>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
   </section>
 </BaseLayout>

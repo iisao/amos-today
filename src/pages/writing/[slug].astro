@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPosts, renderPageBody, formatDate } from "../../lib/notion";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const bodyHtml = await renderPageBody(post.id);
+---
+
+<BaseLayout title={post.title} description={post.excerpt}>
+  <article class="mx-auto max-w-3xl px-6 pt-24 pb-24">
+    <header class="mb-10">
+      <p class="text-xs text-neutral-500 mb-3">{formatDate(post.publishedDate)}</p>
+      <h1 class="text-3xl sm:text-4xl font-medium leading-tight tracking-tight">
+        {post.title}
+      </h1>
+      {post.tags.length > 0 && (
+        <div class="mt-4 flex gap-2 flex-wrap">
+          {post.tags.map((tag) => (
+            <span class="text-xs text-neutral-500">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="post-body" set:html={bodyHtml} />
+
+    <footer class="mt-16 pt-8 border-t border-neutral-200">
+      <a href="/writing" class="text-sm">← 回所有文章</a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .post-body { font-size: 1rem; line-height: 1.75; color: #171717; }
+  .post-body > * + * { margin-top: 1.25em; }
+  .post-body h2 { font-size: 1.4rem; font-weight: 500; margin-top: 2.2em; letter-spacing: -0.01em; }
+  .post-body h3 { font-size: 1.15rem; font-weight: 500; margin-top: 1.8em; }
+  .post-body p { color: #262626; }
+  .post-body a { text-decoration: underline; text-decoration-color: #d4d4d4; text-underline-offset: 4px; }
+  .post-body a:hover { text-decoration-color: #171717; }
+  .post-body ul, .post-body ol { padding-left: 1.5em; }
+  .post-body ul { list-style: disc; }
+  .post-body ol { list-style: decimal; }
+  .post-body li + li { margin-top: 0.4em; }
+  .post-body blockquote { border-left: 3px solid #e5e5e5; padding-left: 1em; color: #525252; font-style: italic; }
+  .post-body code { background: #f5f5f5; padding: 0.15em 0.35em; border-radius: 3px; font-size: 0.9em; }
+  .post-body pre { background: #fafafa; padding: 1em; border-radius: 6px; overflow-x: auto; font-size: 0.875em; }
+  .post-body pre code { background: transparent; padding: 0; }
+  .post-body img { border-radius: 6px; max-width: 100%; height: auto; }
+  .post-body hr { border: 0; border-top: 1px solid #e5e5e5; margin: 2.5em 0; }
+</style>

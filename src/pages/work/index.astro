@@ -1,5 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getProjects } from "../../lib/notion";
+
+const projects = await getProjects();
+
+const grouped = projects.reduce((acc, p) => {
+  const key = p.year ?? 0;
+  (acc[key] ??= []).push(p);
+  return acc;
+}, {} as Record<number, typeof projects>);
+
+const years = Object.keys(grouped)
+  .map(Number)
+  .sort((a, b) => b - a);
 ---
 
 <BaseLayout title="作品" description="樂創媒體與 Amos 經手的專案、提案、產品線。">
@@ -12,7 +25,32 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </p>
 
     <div class="mt-12">
-      <p class="text-neutral-500 italic">（作品集即將上線）</p>
+      {projects.length === 0 ? (
+        <p class="text-neutral-500 italic">（作品集即將上線）</p>
+      ) : (
+        <div class="space-y-12">
+          {years.map((year) => (
+            <div>
+              <h2 class="text-sm font-medium uppercase tracking-wider text-neutral-500 mb-5">
+                {year || "—"}
+              </h2>
+              <ul class="space-y-5">
+                {grouped[year].map((proj) => (
+                  <li class="border-b border-neutral-100 pb-5">
+                    <a href={`/work/${proj.slug}`} class="block no-underline group">
+                      <div class="flex items-baseline justify-between gap-4">
+                        <h3 class="text-base font-medium group-hover:opacity-70">{proj.title}</h3>
+                        {proj.type && <span class="text-xs text-neutral-500 shrink-0">{proj.type}</span>}
+                      </div>
+                      {proj.summary && <p class="mt-1.5 text-sm text-neutral-500">{proj.summary}</p>}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   </section>
 </BaseLayout>
