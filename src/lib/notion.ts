@@ -90,7 +90,7 @@ function readCover(page: any): string | null {
 function pageToPost(page: any): Post | null {
   if (!isFullPage(page)) return null;
   const p = page.properties;
-  const title = readTitle(getProp(p, "Title")) || readTitle(getProp(p, "Name"));
+  const title = readTitle(getProp(p, "Title")) || readTitle(getProp(p, "Name")) || readTitle(getProp(p, "名稱"));
   const slug = readText(getProp(p, "Slug")) || page.id.replace(/-/g, "");
   return {
     id: page.id,
@@ -106,7 +106,7 @@ function pageToPost(page: any): Post | null {
 function pageToProject(page: any): Project | null {
   if (!isFullPage(page)) return null;
   const p = page.properties;
-  const title = readTitle(getProp(p, "Title")) || readTitle(getProp(p, "Name"));
+  const title = readTitle(getProp(p, "Title")) || readTitle(getProp(p, "Name")) || readTitle(getProp(p, "名稱"));
   const slug = readText(getProp(p, "Slug")) || page.id.replace(/-/g, "");
   const status = (readSelect(getProp(p, "Status")) || "Hidden") as Project["status"];
   return {
