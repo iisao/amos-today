@@ -10,7 +10,7 @@ const enabled = Boolean(apiKey && postsDbId && projectsDbId);
 
 if (!enabled) {
   console.warn(
-    "[notion] NOTION_API_KEY or DB IDs missing — site will build with empty content. Set env vars in Vercel and locally in .env to enable.",
+    "[notion] NOTION_API_KEY or DB IDs missing; site will build with empty content. Set env vars in Vercel and locally in .env to enable.",
   );
 }
 
