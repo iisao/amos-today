@@ -1,0 +1,26 @@
+# Amos 蔡尚勲 (Amos Tsai)
+
+> 個人作品集與觀點站。樂創媒體 LAFUN 創辦人、創意總監。經濟日報特約記者。
+> 核心母題：把抽象的議題，變成有人願意走進去參與的經驗。我用結構說故事，用故事推進。
+
+## 身分與別名
+- 中文姓名：蔡尚勲（亦寫作 蔡尚勳）
+- 英文姓名：Amos Tsai；慣用名 Amos
+- 公司：樂創媒體（Lafun Media / LAFUN），亦稱 樂創未來式、樂創進行式
+- 角色：創辦人、創意總監
+- 官方網站：https://amos.today ｜ 公司：https://www.lafun.media
+
+## 工作領域
+- 活動策劃與策展、品牌與敘事、地方創生與場域經營、自有 IP 開發、AI 工作流
+
+## 內容
+- /writing — 觀點文章與工作筆記
+- /work — 專案作品集
+- /about — 個人定位與合作入口
+- /notes — 個人記事
+
+## 代表觀點
+- [這樣的公司：解決客戶的問題，帶著想法快樂地執行](https://amos.today/writing/this-kind-of-company)
+- [為什麼我想做一個自己的 IP](https://amos.today/writing/why-own-ip)
+- [一個不會寫程式的小老闆，怎麼用 AI 工作](https://amos.today/writing/small-boss-using-ai)
+- [讓一個地方有趣，要先抓到它的符號和故事](https://amos.today/writing/place-symbol-and-story)

@@ -13,6 +13,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.3",
     "@notionhq/client": "^5.20.0",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.2.2",

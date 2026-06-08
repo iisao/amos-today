@@ -14,7 +14,13 @@ const { post } = Astro.props;
 const bodyHtml = await renderPageBody(post.id);
 ---
 
-<BaseLayout title={post.title} description={post.excerpt}>
+<BaseLayout
+  title={post.title}
+  description={post.excerpt}
+  type="article"
+  publishedDate={post.publishedDate}
+  tags={post.tags}
+>
   <article class="mx-auto max-w-3xl px-6 pt-24 pb-24">
     <header class="mb-10">
       <p class="text-xs text-neutral-500 mb-3">{formatDate(post.publishedDate)}</p>
