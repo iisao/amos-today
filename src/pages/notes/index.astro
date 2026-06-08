@@ -3,6 +3,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const notes = [
   {
+    slug: "always-with-you",
+    title: "爸爸一直會陪你",
+    meta: "致盼盼 ｜ 2026 夏",
+    blurb:
+      "女兒臨時打來求救填志願，剩一個多小時。那半小時讓我明白，重心從來不是去外面找來的，是有人需要你、而你剛好在。",
+  },
+  {
     slug: "cai-tuo",
     title: "蔡拖小傳",
     meta: "家族 ｜ 羅東木業",
@@ -34,11 +41,13 @@ const notes = [
       {notes.map((n) => (
         <li class="border-b border-neutral-100 pb-10">
           <a href={`/notes/${n.slug}`} class="flex gap-5 no-underline group">
-            <img
-              src={n.cover}
-              alt={n.title}
-              class="w-28 h-28 sm:w-32 sm:h-32 object-cover rounded-lg border border-neutral-200 shrink-0"
-            />
+            {n.cover && (
+              <img
+                src={n.cover}
+                alt={n.title}
+                class="w-28 h-28 sm:w-32 sm:h-32 object-cover rounded-lg border border-neutral-200 shrink-0"
+              />
+            )}
             <div>
               <h2 class="text-lg font-medium group-hover:opacity-70">{n.title}</h2>
               <span class="text-xs text-neutral-400">{n.meta}</span>
