@@ -12,6 +12,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </h1>
     <p class="meta">致盼盼 ｜ 2026 夏・五專志願</p>
 
+    <figure class="hero">
+      <img src="/notes/always-with-you/cover.jpg" alt="那天傍晚，暖燈下的電腦前，螢幕上是盼盼的五專志願選填系統" />
+    </figure>
+
     <p>那天下午，手機響起的時候，電話那頭的盼盼，聲音是急的。</p>
     <p class="short">「爸爸，等下 5 點就要截止，剩一個多小時了，怎麼辦？」</p>
     <p>我這才知道，她的五專志願到那一刻都還沒填。其實這件事本來輪不到我。前一晚她就四處打聽，連阿嬤都打了電話去問；她最要好的閨蜜前一晚已經填好，說好今天教她一起填。盼盼自己對升學一直沒太上心，也不太會操作那套陌生的選填系統。</p>
@@ -47,6 +51,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     color: #737373;
     font-size: 0.9rem;
     margin-top: 0.9rem;
+  }
+  .note .hero { margin: 2em 0 0.5em; }
+  .note .hero img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
   }
   .note p { margin-top: 1.3em; text-align: justify; }
   .note p.short {
