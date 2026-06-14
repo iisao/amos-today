@@ -1,0 +1,583 @@
+---
+// SROI 計算機 / 樂創影響力自評法 落地版
+// 嵌入點：[slug].astro 偵測 slug === 'how-to-count-impact' 時在文末插入
+// 設計：對齊 amos.today DNA（深森林綠 accent / Noto Serif TC 標題 / 1px 淺灰邊框 / 無漸層）
+---
+
+<section class="sroi-calc" aria-label="SROI 計算機">
+  <header class="sc-head">
+    <p class="sc-kicker">樂創影響力自評法 · 互動工具</p>
+    <h2 class="sc-h1">SROI 計算機</h2>
+    <p class="sc-lead">邊填邊算。看清楚那「氛圍很好」背後，到底還剩多少。</p>
+  </header>
+
+  <div class="sc-warn">
+    <b>用之前要記得</b>：數字不是越大越好。保守嚴謹的 1.23，勝過浮誇的 10.0。這套工具的尊嚴，全在「敢扣」。
+  </div>
+
+  <h3 class="sc-h2">跟著做 3 步驟</h3>
+  <div class="sc-steps3">
+    <div class="sc-step"><p><span class="sc-n">1</span>填這次案花了多少錢、影響了哪些人。</p></div>
+    <div class="sc-step"><p><span class="sc-n">2</span>給每個人的改變一個「市場價格」。</p></div>
+    <div class="sc-step"><p><span class="sc-n">3</span>誠實扣掉四種水分。看真實淨值。</p></div>
+  </div>
+
+  <details class="sc-toggle">
+    <summary>不熟 SROI？1 分鐘看懂（建議第一次用先讀）</summary>
+    <p><b>SROI（社會投資報酬率）</b>白話講，就是：你花的每一塊錢，最後在這個世界上實際長出多少價值。</p>
+    <p>比方說，你辦一場食魚教育活動投入 50 萬。如果參與的人後來真的開始吃在地魚、攤商也賺到錢、青年因此回鄉，這些「改變」加起來相當於市場上的 100 萬價值，那 SROI 就是 100 ÷ 50 ＝ <b>2</b>。每 1 元創造 2 元社會價值。</p>
+    <p>但這 100 萬不能亂算。要扣掉四種水分（不辦也會發生的、別人也幫了忙的、隨時間消退的、把別處的擠過來的）。扣完剩 60 萬，SROI 才是 1.2。</p>
+    <p>整套方法就這樣。<b>難的不是公式，是誠實</b>。</p>
+  </details>
+
+  <div class="sc-actions sc-actions-top">
+    <button class="sc-btn" data-action="load-demo" type="button">載入示範案：玩海人 2026</button>
+    <button class="sc-btn sc-ghost" data-action="clear-all" type="button">清空</button>
+  </div>
+
+  <h3 class="sc-h2">① 案名與投入</h3>
+  <div class="sc-card">
+    <div class="sc-row sc-two">
+      <div>
+        <label>案名 <span class="sc-hint">就是這個活動 / 企劃的名字</span></label>
+        <input type="text" data-field="caseName" placeholder="例：玩海人 2026" autocomplete="off">
+      </div>
+      <div>
+        <label>總投入（元） <span class="sc-hint">資金＋人力＋物資都要折算</span></label>
+        <input type="number" data-field="totalInvest" placeholder="500000" min="0" inputmode="numeric">
+        <p class="sc-help">志工時數 × 合理時薪、借用物資的市價、團隊投入工時，全要折算進來。不然 SROI 會虛胖。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sc-h2">② 利害關係人與成果</h3>
+  <p class="sc-help">「利害關係人」就是受這案影響的人或團體。點名 2 到 4 組真正核心的。每組寫一句「因為這案，他變得 ___」的成果，再給它一個市場價格替身。</p>
+
+  <details class="sc-toggle">
+    <summary>不會填？看幾個例子</summary>
+    <div class="sc-example">
+      <b>例 1．攤商</b><br>
+      誰：合作攤商 12 家<br>
+      因為這案，他變得 ___：活動週末三天營收平均淨增 30%<br>
+      代理變數金額：12 家 × 平均淨利增加 3 萬 ＝ <b>$360,000</b>
+    </div>
+    <div class="sc-example">
+      <b>例 2．參與民眾</b><br>
+      誰：報到參與民眾 800 人<br>
+      因為這案，他變得 ___：學會看潮汐表、認得 3 種在地魚<br>
+      代理變數金額：等同食魚教育課程市價 ＝ 800 人 × $500 ＝ <b>$400,000</b>
+    </div>
+    <div class="sc-example">
+      <b>例 3．媒體曝光</b><br>
+      誰：在地新聞讀者 / 旅遊客<br>
+      因為這案，他變得 ___：開始知道頭城外澳是「玩海」目的地<br>
+      代理變數金額：等值廣告購買費 = 30 則 × 平均刊例價 $8,000 ＝ <b>$240,000</b>
+    </div>
+    <div class="sc-example">
+      <b>例 4．在地青年</b><br>
+      誰：參與企劃 / 執行的在地青年 5 名<br>
+      因為這案，他變得 ___：學會節慶活動執行、留鄉意願提升<br>
+      代理變數金額：等同活動企劃培訓課程市價 = 5 人 × $60,000 ＝ <b>$300,000</b>
+    </div>
+    <div class="sc-example">
+      <b>例 5．志工</b><br>
+      誰：投入志工 30 人 × 平均 16 小時<br>
+      因為這案，他變得 ___：建立社群連結、習得活動現場經驗<br>
+      代理變數金額：等值人力成本 = 480 工時 × $250 ＝ <b>$120,000</b>
+    </div>
+    <div class="sc-example">
+      <b>例 6．政府能見度</b><br>
+      誰：所在鄉鎮公所 / 縣府觀光部門<br>
+      因為這案，他變得 ___：在縣府觀光行銷案中持續被列為亮點<br>
+      代理變數金額：後續續約 / 擴充契約金 ＝ <b>$500,000</b>
+    </div>
+    <p class="sc-faint">關鍵：產出（「來了 800 人」）≠ 成果（「800 人學會了什麼」）。<b>動詞從「我們做了」改成「他們因此變了」</b>。</p>
+  </details>
+
+  <div data-region="stakeholders"></div>
+
+  <div class="sc-actions">
+    <button class="sc-btn sc-ghost" data-action="add-row" type="button">＋ 加一組</button>
+    <button class="sc-btn sc-ghost sc-warn-border" data-action="remove-row" type="button">− 刪一組</button>
+  </div>
+
+  <h3 class="sc-h2">③ 四扣：擠水分</h3>
+  <p class="sc-help">每扣一筆，都是對自己誠實。預設值是「謹慎守則」，你應該照實際情況調整。</p>
+
+  <div class="sc-card">
+    <div class="sc-deduct">
+      <label>無功受祿（Deadweight）<span class="sc-hint">就算沒辦這活動，本來也會發生的</span></label>
+      <p class="sc-ask">問問自己：那家店本來生意就在成長嗎？這群人本來就會回鄉嗎？這部分不能算你的。</p>
+      <div class="sc-slider">
+        <input type="range" data-field="deadweight" min="0" max="80" value="15" aria-label="Deadweight">
+        <span class="sc-pct" data-pct="deadweight">15%</span>
+      </div>
+      <details class="sc-bench">
+        <summary>不知道怎麼填？看常見區間（按一下套用）</summary>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>第一次做、沒人在做類似事</b><div class="sc-brange">建議 5-10%</div></div>
+          <button class="sc-bapply" type="button" data-target="deadweight" data-value="8">套用 8%</button>
+        </div>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>已有少量類似活動、同類資源已存在</b><div class="sc-brange">建議 15-30%</div></div>
+          <button class="sc-bapply" type="button" data-target="deadweight" data-value="22">套用 22%</button>
+        </div>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>普遍性活動，市場已成熟</b><div class="sc-brange">建議 35-60%</div></div>
+          <button class="sc-bapply" type="button" data-target="deadweight" data-value="45">套用 45%</button>
+        </div>
+      </details>
+    </div>
+
+    <div class="sc-deduct">
+      <label>他者貢獻（Attribution）<span class="sc-hint">別人、政策、天時也幫了忙</span></label>
+      <p class="sc-ask">問問自己：同期還有誰也在做類似的事？文化局、區公所、其他協會的活動有沒有加成？這部分要按比例分掉。</p>
+      <div class="sc-slider">
+        <input type="range" data-field="attribution" min="0" max="80" value="20" aria-label="Attribution">
+        <span class="sc-pct" data-pct="attribution">20%</span>
+      </div>
+      <details class="sc-bench">
+        <summary>不知道怎麼填？看常見區間（按一下套用）</summary>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>樂創獨家發起、沒有共同主辦</b><div class="sc-brange">建議 5-15%</div></div>
+          <button class="sc-bapply" type="button" data-target="attribution" data-value="10">套用 10%</button>
+        </div>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>有 1-2 個合作夥伴／政策助攻</b><div class="sc-brange">建議 20-35%</div></div>
+          <button class="sc-bapply" type="button" data-target="attribution" data-value="28">套用 28%</button>
+        </div>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>多個單位同期推動、共同 brand</b><div class="sc-brange">建議 40-60%</div></div>
+          <button class="sc-bapply" type="button" data-target="attribution" data-value="50">套用 50%</button>
+        </div>
+      </details>
+    </div>
+
+    <div class="sc-deduct">
+      <label>成果遞減（Drop-off）<span class="sc-hint">改變會隨時間消退</span></label>
+      <p class="sc-ask">問問自己：這次活動帶來的改變，一年後還剩幾成？三年後呢？越是情感、認同類的成果，遞減越快。</p>
+      <div class="sc-slider">
+        <input type="range" data-field="dropoff" min="0" max="80" value="10" aria-label="Drop-off">
+        <span class="sc-pct" data-pct="dropoff">10%</span>
+      </div>
+      <details class="sc-bench">
+        <summary>不知道怎麼填？看常見區間（按一下套用）</summary>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>硬技能 / 知識（學會的不容易忘）</b><div class="sc-brange">建議 5-15%</div></div>
+          <button class="sc-bapply" type="button" data-target="dropoff" data-value="10">套用 10%</button>
+        </div>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>行為改變（要靠維護的習慣）</b><div class="sc-brange">建議 20-35%</div></div>
+          <button class="sc-bapply" type="button" data-target="dropoff" data-value="28">套用 28%</button>
+        </div>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>情感 / 認同（最快淡掉的）</b><div class="sc-brange">建議 40-60%</div></div>
+          <button class="sc-bapply" type="button" data-target="dropoff" data-value="50">套用 50%</button>
+        </div>
+      </details>
+    </div>
+
+    <div class="sc-deduct">
+      <label>替代效應（Displacement）<span class="sc-hint">把別處的需求吸過來，不是淨增加</span></label>
+      <p class="sc-ask">問問自己：來逛市集的人，本來會去爬山、去隔壁鄉鎮消費嗎？這部分是把餅切過來，要倒扣。</p>
+      <div class="sc-slider">
+        <input type="range" data-field="displacement" min="0" max="80" value="5" aria-label="Displacement">
+        <span class="sc-pct" data-pct="displacement">5%</span>
+      </div>
+      <details class="sc-bench">
+        <summary>不知道怎麼填？看常見區間（按一下套用）</summary>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>全新需求（吸引到本來不會花這筆錢的人）</b><div class="sc-brange">建議 0-5%</div></div>
+          <button class="sc-bapply" type="button" data-target="displacement" data-value="3">套用 3%</button>
+        </div>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>部分原有客群轉移過來</b><div class="sc-brange">建議 10-25%</div></div>
+          <button class="sc-bapply" type="button" data-target="displacement" data-value="18">套用 18%</button>
+        </div>
+        <div class="sc-brow">
+          <div class="sc-btext"><b>純流量重分配（從隔壁區域切過來）</b><div class="sc-brange">建議 30-50%</div></div>
+          <button class="sc-bapply" type="button" data-target="displacement" data-value="40">套用 40%</button>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="sc-toggle">
+    <summary>累乘 vs 累加？這套計算機怎麼算</summary>
+    <p>用 <b>累乘扣</b>，符合 SROI 國際標準（SVI）的精神。</p>
+    <pre class="sc-formula">原始成果總值 = Σ 各成果代理變數
+
+淨影響力 = 原始成果總值
+        × (1 − 無功受祿%)
+        × (1 − 他者貢獻%)
+        × (1 − 成果遞減%)
+        × (1 − 替代效應%)
+
+SROI = 淨影響力 ÷ 總投入</pre>
+    <p>累乘＝每一層扣完，剩下的再扣下一層。比累加（直接加總四個百分比）保守、且永遠不出現負值。</p>
+  </details>
+
+  <div class="sc-result" data-region="result">
+    <p class="sc-rlabel">SROI 比值</p>
+    <div>
+      <span class="sc-big" data-out="sroi">0.00</span>
+      <span class="sc-unit">每投入 1 元，創造 <b data-out="sroi-unit">0.00</b> 元社會價值</span>
+    </div>
+
+    <div class="sc-barwrap">
+      <span>擠水分後剩下的真實淨值比例</span>
+      <div class="sc-bar"><div class="sc-fill" data-out="bar"></div></div>
+      <span class="sc-barlabel" data-out="bar-label"></span>
+    </div>
+
+    <div class="sc-breakdown" data-out="breakdown">
+      請先填總投入＋至少一組利害關係人的代理變數金額。
+    </div>
+
+    <div class="sc-interpret" data-out="interpret"></div>
+
+    <div class="sc-actions">
+      <button class="sc-btn" data-action="copy" type="button">複製這份結果</button>
+      <span class="sc-copied" data-out="copied">✓ 已複製</span>
+    </div>
+  </div>
+
+  <p class="sc-foot">樂創影響力自評法 · SROI 落地版　／　方法源頭：李智仁老師 SROI 工作坊</p>
+</section>
+
+<div class="sc-minibar" data-region="minibar" aria-hidden="true">
+  <div class="sc-mb-left">SROI ＝ <b data-out="mini-sroi">0.00</b></div>
+  <button class="sc-mb-right" data-action="mini-jump" type="button">看完整結果 ↓</button>
+</div>
+
+<style>
+  .sroi-calc{
+    --sc-accent:#1a4d3a;
+    --sc-accent-hover:#2d6e54;
+    --sc-accent-soft:#eef3ef;
+    --sc-ink:#171717;
+    --sc-muted:#525252;
+    --sc-line:#e5e5e5;
+    --sc-bg:#ffffff;
+    --sc-bg-soft:#fafafa;
+    --sc-warn:#9a3412;
+    --sc-warn-soft:#fef3eb;
+    --sc-serif:"Noto Serif TC","Songti TC","STSong","PingFang TC",ui-serif,serif;
+
+    margin:64px 0 24px;
+    padding:32px 26px;
+    border:1px solid var(--sc-line);
+    border-radius:10px;
+    background:var(--sc-bg);
+    font-size:16px;
+    line-height:1.7;
+    color:var(--sc-ink);
+  }
+  .sroi-calc *{box-sizing:border-box}
+  .sroi-calc input, .sroi-calc button{font-family:inherit}
+  .sc-head{margin-bottom:14px}
+  .sc-kicker{font-size:12px;letter-spacing:1.5px;color:var(--sc-accent);text-transform:uppercase;font-weight:600;margin:0 0 10px}
+  .sc-h1{font-family:var(--sc-serif);font-size:28px;line-height:1.3;margin:0 0 8px;font-weight:700;letter-spacing:-0.01em;color:var(--sc-ink)}
+  .sc-h2{font-family:var(--sc-serif);font-size:19px;margin:34px 0 10px;font-weight:700;color:var(--sc-ink);letter-spacing:-0.01em}
+  .sc-lead{font-size:15.5px;color:var(--sc-muted);margin:0;line-height:1.75}
+
+  .sc-warn{background:var(--sc-warn-soft);border:1px solid #f7d7b5;border-left:3px solid var(--sc-warn);padding:13px 16px;margin:18px 0;border-radius:4px;font-size:14px;color:#5b2616;line-height:1.7}
+  .sc-warn b{color:#5b2616}
+
+  .sc-steps3{display:grid;gap:12px;margin:12px 0 18px}
+  @media (min-width:640px){.sc-steps3{grid-template-columns:1fr 1fr 1fr}}
+  .sc-step{padding:14px 16px;border:1px solid var(--sc-line);border-radius:6px;background:var(--sc-bg)}
+  .sc-step .sc-n{display:inline-block;font-family:var(--sc-serif);font-size:20px;color:var(--sc-accent);font-weight:700;margin-right:8px;vertical-align:baseline}
+  .sc-step p{margin:0;font-size:14.5px;line-height:1.7;color:var(--sc-ink)}
+
+  .sc-row{display:grid;gap:12px;margin:8px 0}
+  @media (min-width:640px){
+    .sc-row.sc-two{grid-template-columns:1fr 1fr}
+    .sc-row.sc-three{grid-template-columns:2fr 3fr 2fr}
+  }
+  .sroi-calc label{display:block;font-weight:500;font-size:13.5px;color:var(--sc-ink);margin-bottom:4px}
+  .sc-hint{font-weight:400;color:var(--sc-muted);font-size:12.5px;margin-left:6px}
+  .sroi-calc input[type="text"], .sroi-calc input[type="number"]{
+    width:100%;font-size:15px;padding:9px 11px;
+    border:1px solid var(--sc-line);background:var(--sc-bg);color:var(--sc-ink);
+    border-radius:4px;transition:border-color .15s;
+  }
+  .sroi-calc input[type="number"]{font-variant-numeric:tabular-nums;font-weight:500}
+  .sroi-calc input:focus{outline:none;border-color:var(--sc-accent);box-shadow:0 0 0 3px var(--sc-accent-soft)}
+
+  .sc-slider{display:flex;align-items:center;gap:14px;margin-top:8px}
+  .sc-slider input[type="range"]{flex:1;height:3px;-webkit-appearance:none;appearance:none;background:var(--sc-line);outline:none;border-radius:2px}
+  .sc-slider input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;background:var(--sc-accent);border:none;cursor:pointer;border-radius:50%}
+  .sc-slider input[type="range"]::-webkit-slider-thumb:hover{background:var(--sc-accent-hover)}
+  .sc-slider input[type="range"]::-moz-range-thumb{width:18px;height:18px;background:var(--sc-accent);border:none;cursor:pointer;border-radius:50%}
+  .sc-pct{min-width:54px;text-align:right;font-weight:500;color:var(--sc-ink);font-size:15px;font-variant-numeric:tabular-nums}
+
+  .sc-card{background:var(--sc-bg);border:1px solid var(--sc-line);border-radius:6px;padding:20px;margin:12px 0}
+
+  .sc-stakeholder{border:1px solid var(--sc-line);background:var(--sc-bg);padding:16px;margin:10px 0;border-radius:6px}
+  .sc-stakeholder .sc-sh-title{margin:0 0 12px;font-family:inherit;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--sc-accent);font-weight:600}
+
+  .sc-deduct{padding:16px 0;border-top:1px solid var(--sc-line)}
+  .sc-deduct:first-child{border-top:none;padding-top:0}
+  .sc-deduct:last-child{padding-bottom:0}
+  .sc-ask{font-size:13px;color:var(--sc-muted);margin:4px 0 0;line-height:1.7}
+
+  .sc-result{background:var(--sc-accent-soft);border:1px solid #cfded5;border-radius:8px;padding:24px;margin:28px 0 20px}
+  .sc-rlabel{font-size:11.5px;letter-spacing:2px;color:var(--sc-accent);font-weight:600;margin:0 0 8px;text-transform:uppercase}
+  .sc-big{font-family:var(--sc-serif);font-size:52px;font-weight:700;color:var(--sc-ink);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1.5px}
+  .sc-unit{font-size:13px;color:var(--sc-muted);font-weight:500;margin-left:8px}
+  .sc-breakdown{margin-top:14px;font-size:14px;line-height:1.85;color:var(--sc-ink);padding:11px 13px;background:rgba(255,255,255,.6);border-radius:6px}
+  .sc-breakdown b{color:var(--sc-ink);font-weight:600}
+  .sc-interpret{margin-top:13px;padding:13px 15px;background:#fff;border-left:3px solid var(--sc-accent);font-size:14px;line-height:1.85}
+  .sc-interpret b{color:var(--sc-accent);font-weight:600}
+
+  .sc-barwrap{margin:14px 0 0;font-size:12.5px;color:var(--sc-muted)}
+  .sc-bar{height:9px;background:#fff;border:1px solid #cfded5;position:relative;overflow:hidden;margin-top:6px;border-radius:5px}
+  .sc-fill{height:100%;background:var(--sc-accent);width:0%;transition:width .3s}
+  .sc-barlabel{font-size:12px;color:var(--sc-muted);margin-top:4px;display:inline-block}
+
+  .sc-btn{display:inline-block;font-size:14px;font-weight:500;padding:8px 16px;border:1px solid var(--sc-accent);background:var(--sc-accent);color:#fff;cursor:pointer;border-radius:4px;transition:background .15s,color .15s}
+  .sc-btn:hover{background:var(--sc-accent-hover);border-color:var(--sc-accent-hover)}
+  .sc-ghost{background:transparent;color:var(--sc-accent)}
+  .sc-ghost:hover{background:var(--sc-accent-soft);color:var(--sc-accent)}
+  .sc-warn-border{border-color:#dcd0bf;color:var(--sc-warn)}
+  .sc-warn-border:hover{background:var(--sc-warn-soft)}
+
+  .sc-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .sc-actions-top{margin:8px 0 20px}
+  .sc-copied{display:inline-block;margin-left:10px;color:var(--sc-accent);font-weight:600;font-size:13.5px;opacity:0;transition:opacity .3s}
+  .sc-copied.sc-show{opacity:1}
+
+  .sc-formula{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:#1a1a1a;color:#e5e5e5;padding:13px 15px;line-height:1.7;white-space:pre-wrap;margin:10px 0;border-radius:6px;border:none;overflow-x:auto}
+
+  .sroi-calc details{margin:12px 0;padding:13px 16px;border:1px solid var(--sc-line);border-radius:6px;background:var(--sc-bg-soft)}
+  .sroi-calc details summary{cursor:pointer;font-weight:500;color:var(--sc-accent);font-size:14px;list-style:none}
+  .sroi-calc details summary::before{content:"+ ";color:var(--sc-accent);font-weight:600}
+  .sroi-calc details[open] summary::before{content:"− "}
+  .sroi-calc details[open] summary{margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(--sc-line)}
+  .sroi-calc details p, .sroi-calc details ul{font-size:14px;line-height:1.85;margin:8px 0;color:var(--sc-ink)}
+
+  .sc-example{background:var(--sc-bg);border:1px solid var(--sc-line);padding:11px 13px;margin:8px 0;font-size:13.5px;border-radius:4px;line-height:1.75}
+  .sc-example b{color:var(--sc-accent);font-weight:600}
+
+  .sc-bench{margin-top:10px;background:#fff;padding:11px 13px;border:1px solid var(--sc-line);border-radius:5px}
+  .sc-bench summary{font-size:13px;font-weight:500;color:var(--sc-accent);cursor:pointer;list-style:none}
+  .sc-bench summary::before{content:"+ "}
+  .sc-bench[open] summary::before{content:"− "}
+  .sc-bench[open] summary{margin-bottom:7px;padding-bottom:7px;border-bottom:1px dashed var(--sc-line)}
+  .sc-brow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;font-size:13px;line-height:1.5;border-top:1px dotted var(--sc-line)}
+  .sc-brow:first-of-type{border-top:none}
+  .sc-btext{flex:1}
+  .sc-btext b{color:var(--sc-ink);font-weight:600}
+  .sc-brange{color:var(--sc-muted);font-size:12px}
+  .sc-bapply{flex:none;font-size:12.5px;padding:5px 10px;border:1px solid var(--sc-accent);background:transparent;color:var(--sc-accent);border-radius:3px;cursor:pointer}
+  .sc-bapply:hover{background:var(--sc-accent);color:#fff}
+
+  .sc-faint{font-size:13px;margin-top:11px;color:var(--sc-muted)}
+  .sc-help{font-size:13px;color:var(--sc-muted);margin-top:6px;line-height:1.7}
+  .sc-foot{margin-top:32px;font-size:12.5px;color:var(--sc-muted);text-align:center;border-top:1px solid var(--sc-line);padding-top:18px;line-height:1.8}
+
+  /* mini sticky bar */
+  .sc-minibar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--sc-line);padding:9px 18px;display:none;box-shadow:0 -2px 12px rgba(0,0,0,.06);z-index:50}
+  .sc-minibar.sc-show{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .sc-mb-left{font-family:var(--sc-serif);font-size:17px;color:var(--sc-ink);font-variant-numeric:tabular-nums}
+  .sc-mb-left b{font-size:21px;color:var(--sc-accent);font-weight:700;margin:0 4px}
+  .sc-mb-right{font-size:12.5px;color:var(--sc-accent);cursor:pointer;border:1px solid var(--sc-accent);padding:6px 11px;border-radius:4px;background:transparent}
+  .sc-mb-right:hover{background:var(--sc-accent-soft)}
+</style>
+
+<script is:inline>
+(function(){
+  const root = document.querySelector('.sroi-calc');
+  if (!root || root.dataset.scInit) return;
+  root.dataset.scInit = '1';
+
+  const minibar = document.querySelector('.sc-minibar');
+  const $f = (name) => root.querySelector(`[data-field="${name}"]`);
+  const $pct = (name) => root.querySelector(`[data-pct="${name}"]`);
+  const $out = (name) => root.querySelector(`[data-out="${name}"]`) || (minibar && minibar.querySelector(`[data-out="${name}"]`));
+  const $region = (name) => root.querySelector(`[data-region="${name}"]`);
+  const stakeholdersEl = $region('stakeholders');
+
+  const esc = (s) => String(s).replace(/"/g,'&quot;');
+  let rowCount = 0;
+
+  function addRow(name='', outcome='', value=''){
+    rowCount++;
+    const div = document.createElement('div');
+    div.className = 'sc-stakeholder';
+    div.innerHTML = `
+      <h4 class="sc-sh-title">利害關係人 #${rowCount}</h4>
+      <div class="sc-row sc-three">
+        <div><label>是誰</label><input type="text" class="sc-sh-name" placeholder="例：在地攤商" autocomplete="off" value="${esc(name)}"></div>
+        <div><label>因為這案，他變得 ___</label><input type="text" class="sc-sh-outcome" placeholder="例：營收淨增 30%" autocomplete="off" value="${esc(outcome)}"></div>
+        <div><label>代理變數金額（元）</label><input type="number" class="sc-sh-value" placeholder="100000" min="0" inputmode="numeric" value="${esc(value)}"></div>
+      </div>
+    `;
+    stakeholdersEl.appendChild(div);
+    div.querySelectorAll('input').forEach(i => i.addEventListener('input', recalc));
+    renumber();
+  }
+  function renumber(){
+    [...stakeholdersEl.children].forEach((el, i) => {
+      el.querySelector('.sc-sh-title').textContent = `利害關係人 #${i+1}`;
+    });
+  }
+  function clearShs(){ stakeholdersEl.innerHTML=''; rowCount=0; }
+
+  addRow(); addRow(); addRow();
+
+  ['deadweight','attribution','dropoff','displacement'].forEach(k => {
+    $f(k).addEventListener('input', () => { $pct(k).textContent = $f(k).value + '%'; recalc(); });
+  });
+  $f('caseName').addEventListener('input', recalc);
+  $f('totalInvest').addEventListener('input', recalc);
+
+  root.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-action], [data-target]');
+    if (!t) return;
+    const action = t.dataset.action;
+    if (t.dataset.target){
+      const slider = $f(t.dataset.target);
+      const pct = $pct(t.dataset.target);
+      if (slider && pct){
+        slider.value = t.dataset.value;
+        pct.textContent = t.dataset.value + '%';
+        recalc();
+      }
+      return;
+    }
+    if (action === 'add-row'){
+      if (stakeholdersEl.children.length >= 6){ alert('最多 6 組。再多就不是聚焦了。'); return; }
+      addRow(); recalc();
+    } else if (action === 'remove-row'){
+      if (stakeholdersEl.children.length <= 1) return;
+      stakeholdersEl.removeChild(stakeholdersEl.lastElementChild);
+      renumber(); recalc();
+    } else if (action === 'load-demo'){
+      $f('caseName').value = '玩海人 2026';
+      $f('totalInvest').value = 2500000;
+      clearShs();
+      addRow('合作攤商 40 家', '活動三天平均營收淨增 25%', 600000);
+      addRow('現場參與民眾 8000 人', '認識在地海洋文化、學會看潮汐', 800000);
+      addRow('媒體報導 30 則', '頭城外澳被建立為玩海目的地', 450000);
+      addRow('在地青年 5 名', '建立樂創節慶執行經驗、留鄉意願提升', 300000);
+      ['deadweight','attribution','dropoff','displacement'].forEach((k,i) => {
+        const v = [15,25,10,8][i];
+        $f(k).value = v;
+        $pct(k).textContent = v + '%';
+      });
+      recalc();
+      root.scrollIntoView({behavior:'smooth',block:'start'});
+    } else if (action === 'clear-all'){
+      if (!confirm('清空所有欄位？')) return;
+      $f('caseName').value = '';
+      $f('totalInvest').value = '';
+      clearShs(); addRow(); addRow(); addRow();
+      ['deadweight','attribution','dropoff','displacement'].forEach((k,i) => {
+        const v = [15,20,10,5][i];
+        $f(k).value = v;
+        $pct(k).textContent = v + '%';
+      });
+      recalc();
+    } else if (action === 'copy'){
+      copyResult();
+    } else if (action === 'mini-jump'){
+      $region('result').scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  });
+
+  function getSh(){
+    return [...stakeholdersEl.children].map(el => ({
+      name: el.querySelector('.sc-sh-name').value.trim(),
+      outcome: el.querySelector('.sc-sh-outcome').value.trim(),
+      value: parseFloat(el.querySelector('.sc-sh-value').value) || 0,
+    }));
+  }
+
+  function recalc(){
+    const invest = parseFloat($f('totalInvest').value) || 0;
+    const sh = getSh();
+    const gross = sh.reduce((s,x) => s + x.value, 0);
+    const d = parseFloat($f('deadweight').value)/100;
+    const a = parseFloat($f('attribution').value)/100;
+    const r = parseFloat($f('dropoff').value)/100;
+    const p = parseFloat($f('displacement').value)/100;
+    const net = gross * (1-d) * (1-a) * (1-r) * (1-p);
+    const sroi = invest > 0 ? net / invest : 0;
+
+    $out('sroi').textContent = sroi.toFixed(2);
+    $out('sroi-unit').textContent = sroi.toFixed(2);
+    const mini = $out('mini-sroi'); if (mini) mini.textContent = sroi.toFixed(2);
+
+    if (invest > 0 && gross > 0){
+      minibar.classList.add('sc-show');
+      minibar.setAttribute('aria-hidden','false');
+    } else {
+      minibar.classList.remove('sc-show');
+      minibar.setAttribute('aria-hidden','true');
+    }
+
+    const remain = gross > 0 ? (net/gross) : 0;
+    $out('bar').style.width = (remain*100).toFixed(1) + '%';
+    $out('bar-label').textContent = gross > 0 ? `原始 100% → 擠水分後剩 ${(remain*100).toFixed(1)}%` : '';
+
+    if (invest === 0 || gross === 0){
+      $out('breakdown').textContent = '請先填總投入＋至少一組利害關係人的代理變數金額。';
+      $out('interpret').textContent = '';
+      return;
+    }
+
+    const fmt = (n) => new Intl.NumberFormat('zh-TW', {maximumFractionDigits:0}).format(Math.round(n));
+    $out('breakdown').innerHTML =
+      `總投入 <b>$${fmt(invest)}</b> ／ 原始成果總值 <b>$${fmt(gross)}</b><br>` +
+      `擠水分後淨影響力 <b>$${fmt(net)}</b>（扣 ${(d*100).toFixed(0)}/${(a*100).toFixed(0)}/${(r*100).toFixed(0)}/${(p*100).toFixed(0)}%）`;
+
+    let interp = '';
+    if (sroi < 1){
+      interp = `<b>不到 1。</b>這個案在「擠完水分」後沒有創造比投入更多的社會價值。三個檢查點：<br>① 是不是有重要的利害關係人沒列上來？<br>② 代理變數是不是低估了？<br>③ 四扣是不是扣太兇？`;
+    } else if (sroi < 2){
+      interp = `<b>1 到 2 之間。保守可信的區間。</b>沒有戲劇性，但經得起被問第二次。對贊助商和公部門講這個數字，比浮誇的 10 倍報酬更有公信力。`;
+    } else if (sroi < 5){
+      interp = `<b>2 到 5 之間。</b>數字漂亮，但小心：<br>① 成果地圖是不是把間接受益也算進去了？<br>② 四扣是不是太寬？<br>建議再做一次敏感度測試：把四扣各 +10% 看看數字會不會掉到 2 以下。`;
+    } else {
+      interp = `<b>超過 5。停下來。</b>要嘛這案真的稀有，要嘛你算寬了。複核兩件事：<br>① 代理變數是否高估？<br>② 無功受祿是不是該調高？`;
+    }
+    $out('interpret').innerHTML = interp;
+  }
+
+  function copyResult(){
+    const name = $f('caseName').value || '（未命名）';
+    const invest = parseFloat($f('totalInvest').value) || 0;
+    const sh = getSh();
+    const gross = sh.reduce((s,x) => s + x.value, 0);
+    const d = parseFloat($f('deadweight').value);
+    const a = parseFloat($f('attribution').value);
+    const r = parseFloat($f('dropoff').value);
+    const p = parseFloat($f('displacement').value);
+    const net = gross * (1-d/100) * (1-a/100) * (1-r/100) * (1-p/100);
+    const sroi = invest > 0 ? net / invest : 0;
+    const fmt = (n) => new Intl.NumberFormat('zh-TW', {maximumFractionDigits:0}).format(Math.round(n));
+    const lines = [
+      `【SROI 自評結果】${name}`, ``,
+      `總投入：$${fmt(invest)}`, ``,
+      `利害關係人與成果：`,
+      ...sh.filter(x => x.name || x.outcome || x.value).map((x,i) =>
+        `  ${i+1}. ${x.name || '(未填)'} ／ ${x.outcome || '(未填)'} ／ $${fmt(x.value)}`),
+      ``,
+      `原始成果總值：$${fmt(gross)}`,
+      `擠水分：無功受祿 ${d}% ／ 他者貢獻 ${a}% ／ 成果遞減 ${r}% ／ 替代效應 ${p}%`,
+      `真實淨影響力：$${fmt(net)}`, ``,
+      `SROI ＝ ${sroi.toFixed(2)}（每投入 1 元，創造 ${sroi.toFixed(2)} 元社會價值）`, ``,
+      `方法：樂創影響力自評法（SROI 落地版）`,
+    ];
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const c = $out('copied');
+      c.classList.add('sc-show');
+      setTimeout(() => c.classList.remove('sc-show'), 1800);
+    });
+  }
+
+  recalc();
+})();
+</script>

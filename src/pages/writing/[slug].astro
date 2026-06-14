@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getPosts, renderPageBody, formatDate } from "../../lib/notion";
+import SroiCalculator from "../../components/SroiCalculator.astro";
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -12,6 +13,9 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const bodyHtml = await renderPageBody(post.id);
+
+// 文末條件插入互動元件
+const hasSroiCalculator = post.slug === "how-to-count-impact";
 ---
 
 <BaseLayout
@@ -38,6 +42,8 @@ const bodyHtml = await renderPageBody(post.id);
 
     <div class="post-body" set:html={bodyHtml} />
 
+    {hasSroiCalculator && <SroiCalculator />}
+
     <footer class="mt-16 pt-8 border-t border-neutral-200">
       <a href="/writing" class="text-sm">← 回所有文章</a>
     </footer>
@@ -60,6 +66,16 @@ const bodyHtml = await renderPageBody(post.id);
   .post-body code { background: #f5f5f5; padding: 0.15em 0.35em; border-radius: 3px; font-size: 0.9em; }
   .post-body pre { background: #fafafa; padding: 1em; border-radius: 6px; overflow-x: auto; font-size: 0.875em; }
   .post-body pre code { background: transparent; padding: 0; }
-  .post-body img { border-radius: 6px; max-width: 100%; height: auto; }
+  .post-body img {
+    display: block;
+    margin: 3.2em auto;
+    max-width: 72%;
+    height: auto;
+    border-radius: 2px;
+    border: 1px solid #ececec;
+  }
+  @media (max-width: 640px) {
+    .post-body img { max-width: 92%; margin: 2.2em auto; }
+  }
   .post-body hr { border: 0; border-top: 1px solid #e5e5e5; margin: 2.5em 0; }
 </style>
