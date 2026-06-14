@@ -34,16 +34,25 @@ const site = Astro.site ?? new URL("https://amos.today");
 const canonicalURL = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL(image ?? "/og.png", site).href;
 
+// Google Search Console 驗證碼：登入 GSC 取得後，把引號內容填上即可（留空則不輸出）
+const googleSiteVerification = "";
+
 // ── 結構化資料 JSON-LD ───────────────────────────────────
 const person = {
   "@type": "Person",
   "@id": `${site.origin}/#amos`,
   name: "蔡尚勲",
-  alternateName: ["蔡尚勳", "Amos", "Amos Tsai"],
+  alternateName: ["蔡尚勳", "Amos", "Amos Tsai", "Tsai Shang Hsun"],
   url: site.origin,
   jobTitle: "創辦人、創意總監",
+  description:
+    "樂創媒體（LAFUN / Lafun Media）創辦人與創意總監。在策劃、寫作與執行的交界處工作，橫跨提案、標案、品牌與內容策略、活動策展、地方創生與自有 IP。",
   worksFor: { "@id": `${site.origin}/#lafun` },
-  sameAs: ["https://www.lafun.media"],
+  sameAs: [
+    "https://www.lafun.media",
+    "https://supr.link/Ure06",
+    "https://supr.link/PKeYS",
+  ],
 };
 const organization = {
   "@type": "Organization",
@@ -93,6 +102,9 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
     <meta name="keywords" content={keywords} />
     <meta name="author" content="蔡尚勲 Amos Tsai" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
+    {googleSiteVerification && (
+      <meta name="google-site-verification" content={googleSiteVerification} />
+    )}
     <link rel="canonical" href={canonicalURL} />
 
     <meta name="theme-color" content="#1a4d3a" />
