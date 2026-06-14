@@ -35,7 +35,7 @@ const canonicalURL = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL(image ?? "/og.png", site).href;
 
 // Google Search Console 驗證碼：登入 GSC 取得後，把引號內容填上即可（留空則不輸出）
-const googleSiteVerification = "";
+const googleSiteVerification = "Jy6eB0ByQFqOOdfWEQ5Map6prKfTpFrDFf69UDKicJ4";
 
 // ── 結構化資料 JSON-LD ───────────────────────────────────
 const person = {
@@ -50,6 +50,9 @@ const person = {
   worksFor: { "@id": `${site.origin}/#lafun` },
   sameAs: [
     "https://www.lafun.media",
+    "https://www.linkedin.com/in/amos80s",
+    "https://www.instagram.com/iisao80s/",
+    "https://udn.com/news/reporter/MDQxNTA=",
     "https://supr.link/Ure06",
     "https://supr.link/PKeYS",
   ],
