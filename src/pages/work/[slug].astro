@@ -1,4 +1,5 @@
 ---
+import fs from "node:fs";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getProjects, renderPageBody } from "../../lib/notion";
 
@@ -12,9 +13,14 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const bodyHtml = await renderPageBody(project.id);
+
+// Per-project social share card: use /work/<slug>/og.jpg when present,
+// otherwise BaseLayout falls back to the site-wide og.png.
+const ogPath = `/work/${project.slug}/og.jpg`;
+const ogImage = fs.existsSync(`public${ogPath}`) ? ogPath : undefined;
 ---
 
-<BaseLayout title={project.title} description={project.summary}>
+<BaseLayout title={project.title} description={project.summary} image={ogImage} type="article">
   <article class="mx-auto max-w-3xl px-6 pt-24 pb-24">
     <header class="mb-10">
       <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-xs text-neutral-500 mb-3">
