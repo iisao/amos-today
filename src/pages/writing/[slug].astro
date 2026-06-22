@@ -74,8 +74,18 @@ const hasSroiCalculator = post.slug === "how-to-count-impact";
     border-radius: 2px;
     border: 1px solid #ececec;
   }
+  .post-body figure { margin: 3.2em auto; max-width: 72%; }
+  .post-body figure img { margin: 0 auto; max-width: 100%; }
+  .post-body figcaption {
+    margin-top: 0.7em;
+    text-align: center;
+    color: #737373;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
   @media (max-width: 640px) {
     .post-body img { max-width: 92%; margin: 2.2em auto; }
+    .post-body figure { max-width: 92%; margin: 2.2em auto; }
   }
   .post-body hr { border: 0; border-top: 1px solid #e5e5e5; margin: 2.5em 0; }
   .post-body table {

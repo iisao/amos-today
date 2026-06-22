@@ -186,7 +186,17 @@ export async function renderPageBody(pageId: string): Promise<string> {
   if (!n2m) return "";
   const blocks = await n2m.pageToMarkdown(pageId);
   const md = n2m.toMarkdownString(blocks).parent ?? "";
-  return marked.parse(md, { async: false }) as string;
+  let html = marked.parse(md, { async: false }) as string;
+  // Standardize images: a standalone image whose alt carries a caption becomes
+  // <figure><img><figcaption> so captions render centered + small (site standard).
+  html = html.replace(
+    /<p>\s*<img([^>]*?)\salt="([^"]*)"([^>]*?)>\s*<\/p>/g,
+    (whole, pre, alt, post) =>
+      alt
+        ? `<figure><img${pre} alt="${alt}"${post} loading="lazy"><figcaption>${alt}</figcaption></figure>`
+        : whole,
+  );
+  return html;
 }
 
 export function formatDate(iso: string | null): string {
