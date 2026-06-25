@@ -37,6 +37,11 @@ const ogImage = new URL(image ?? "/og.png", site).href;
 // Google Search Console 驗證碼：登入 GSC 取得後，把引號內容填上即可（留空則不輸出）
 const googleSiteVerification = "Jy6eB0ByQFqOOdfWEQ5Map6prKfTpFrDFf69UDKicJ4";
 
+// Google Analytics 4：在 GA 建好 property 後，把 Measurement ID（G-XXXXXXXXXX）填進來即可。
+// 留空則完全不輸出；且僅在正式站（PROD）載入，本機 dev / Vercel preview 不會打點。
+const gaId = "G-TV02QZ0XG3";
+const loadGA = !!gaId && import.meta.env.PROD;
+
 // ── 結構化資料 JSON-LD ───────────────────────────────────
 const person = {
   "@type": "Person",
@@ -142,6 +147,13 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+    {loadGA && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} is:inline></script>
+        <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`}></script>
+      </>
+    )}
   </head>
   <body class="min-h-screen flex flex-col">
     <header class="border-b border-neutral-200">
