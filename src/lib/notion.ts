@@ -196,6 +196,13 @@ export async function renderPageBody(pageId: string): Promise<string> {
         ? `<figure><img${pre} alt="${alt}"${post} loading="lazy"><figcaption>${alt}</figcaption></figure>`
         : whole,
   );
+  // Image-credit line: a paragraph opening with 圖片來源／來源／圖：gets a class
+  // so it renders as de-emphasized gray small text with a top rule (Notion's
+  // divider block does not survive this pipeline, so we cannot rely on <hr>).
+  html = html.replace(
+    /<p>((?:圖片來源|來源|圖)[：:][\s\S]*?)<\/p>/g,
+    '<p class="img-credit">$1</p>',
+  );
   return html;
 }
 
