@@ -86,8 +86,14 @@ const hasSroiCalculator = post.slug === "how-to-count-impact";
   @media (max-width: 640px) {
     .post-body img { max-width: 92%; margin: 2.2em auto; }
     .post-body figure { max-width: 92%; margin: 2.2em auto; }
+    /* 手機：首圖高度設上限，避免大圖把標題與首段推出畫面 */
+    .post-body figure img,
+    .post-body img { max-height: 60vh; width: auto; }
   }
   .post-body hr { border: 0; border-top: 1px solid #e5e5e5; margin: 2.5em 0; }
+  /* 文末出處／附註行（緊接 hr）：灰階小字，與圖說一致 */
+  .post-body hr + p { font-size: 0.85rem; color: #737373; }
+  .post-body hr + p a { text-decoration-color: #c4c4c4; }
   .post-body table {
     width: 100%;
     border-collapse: collapse;
