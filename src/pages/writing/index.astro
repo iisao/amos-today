@@ -1,8 +1,23 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getPosts, formatDate } from "../../lib/notion";
 
 const posts = await getPosts();
+
+// 目錄頁縮圖：有專屬 OG 卡（/writing/<slug>/og.jpg）就用它，否則退回
+// Notion 頁的 external 封面（穩定網址），再否則 null → 顯示字首小方塊。
+const covers: Record<string, string | null> = Object.fromEntries(
+  posts.map((post) => {
+    const card = `/writing/${post.slug}/og.jpg`;
+    if (fs.existsSync(path.join(process.cwd(), "public", card))) return [post.slug, card];
+    // Notion file 封面是會過期的簽名網址，只採用穩定的 external 封面
+    if (post.cover && !/amazonaws|notion-static|prod-files/.test(post.cover))
+      return [post.slug, post.cover];
+    return [post.slug, null];
+  }),
+);
 ---
 
 <BaseLayout title="觀點文章" description="關於策略、敘事、執行的觀察與筆記。">
@@ -18,22 +33,40 @@ const posts = await getPosts();
       {posts.length === 0 ? (
         <p class="text-neutral-500 italic">（文章即將上線）</p>
       ) : (
-        <ul class="space-y-8">
+        <ul class="space-y-10">
           {posts.map((post) => (
-            <li class="border-b border-neutral-100 pb-8">
-              <a href={`/writing/${post.slug}`} class="block no-underline group">
-                <div class="flex items-baseline justify-between gap-4">
-                  <h2 class="text-lg font-medium group-hover:opacity-70">{post.title}</h2>
-                  <span class="text-xs text-neutral-500 shrink-0">{formatDate(post.publishedDate)}</span>
-                </div>
-                {post.excerpt && <p class="mt-2 text-sm text-neutral-500">{post.excerpt}</p>}
-                {post.tags.length > 0 && (
-                  <div class="mt-3 flex gap-2 flex-wrap">
-                    {post.tags.map((tag) => (
-                      <span class="text-xs text-neutral-400">#{tag}</span>
-                    ))}
+            <li class="border-b border-neutral-100 pb-10">
+              <a href={`/writing/${post.slug}`} class="flex gap-5 no-underline group">
+                {covers[post.slug] ? (
+                  <img
+                    src={covers[post.slug]}
+                    alt={post.title}
+                    class="w-28 h-28 sm:w-32 sm:h-32 object-cover rounded-lg border border-neutral-200 shrink-0"
+                  />
+                ) : (
+                  <div
+                    class="w-28 h-28 sm:w-32 sm:h-32 rounded-lg border border-neutral-200 bg-neutral-50 flex items-center justify-center shrink-0"
+                    aria-hidden="true"
+                  >
+                    <span class="text-3xl font-medium text-neutral-300">{post.title.slice(0, 1)}</span>
                   </div>
                 )}
+                <div class="min-w-0">
+                  <div class="flex items-baseline justify-between gap-4">
+                    <h2 class="text-lg font-medium group-hover:opacity-70">{post.title}</h2>
+                    <span class="text-xs text-neutral-500 shrink-0">{formatDate(post.publishedDate)}</span>
+                  </div>
+                  {post.excerpt && (
+                    <p class="mt-2 text-sm text-neutral-500 leading-relaxed">{post.excerpt}</p>
+                  )}
+                  {post.tags.length > 0 && (
+                    <div class="mt-3 flex gap-2 flex-wrap">
+                      {post.tags.map((tag) => (
+                        <span class="text-xs text-neutral-400">#{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </a>
             </li>
           ))}
