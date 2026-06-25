@@ -1,4 +1,6 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getPosts, renderPageBody, formatDate } from "../../lib/notion";
 import SroiCalculator from "../../components/SroiCalculator.astro";
@@ -14,6 +16,13 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const bodyHtml = await renderPageBody(post.id);
 
+// 社群分享 OG 圖：優先用該文專屬卡 /writing/<slug>/og.jpg（1200×630，跨平台最穩），
+// 沒有就自動抓內文首圖，再沒有則 BaseLayout 退回站台預設 /og.png。
+const ogCard = `/writing/${post.slug}/og.jpg`;
+const ogCardExists = fs.existsSync(path.join(process.cwd(), "public", ogCard));
+const heroMatch = bodyHtml.match(/<img[^>]+src="([^"]+)"/);
+const ogImage = ogCardExists ? ogCard : heroMatch?.[1];
+
 // 文末條件插入互動元件
 const hasSroiCalculator = post.slug === "how-to-count-impact";
 ---
@@ -21,6 +30,7 @@ const hasSroiCalculator = post.slug === "how-to-count-impact";
 <BaseLayout
   title={post.title}
   description={post.excerpt}
+  image={ogImage}
   type="article"
   publishedDate={post.publishedDate}
   tags={post.tags}
