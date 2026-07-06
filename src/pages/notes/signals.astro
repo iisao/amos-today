@@ -14,7 +14,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <p class="meta">二十年前的自己留下的訊號 ｜ 2026 夏</p>
 
     <figure class="hero">
-      <img src="/notes/signals/night101.jpg" alt="雨後的台北夜裡，一輛黑色的車停在路邊，遠處是亮著燈的一〇一" />
+      <img src="/notes/signals/waveform.jpg" alt="一條橫跨 2003 到 2026 的訊號波形：先是細線，中段增生又靜默，尾段越來越密" />
     </figure>
 
     <p>我把二十年的筆記，倒給 AI 讀。</p>
@@ -63,6 +63,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     <p>現在我寫筆記的心情不太一樣了。每一則都是訊號，發給二十年後那個人。他會在某個我想像不到的場合，用某種我想像不到的工具，把今天翻出來讀。我不知道他會是什麼樣子，只希望他讀到的時候，還在做自己想做的事情。</p>
     <p>想了想，我把這篇也存了進去。</p>
+
+    <figure class="inline">
+      <img src="/notes/signals/cosmos.jpg" alt="深色的星空裡，一個溫暖的亮點，波紋一圈一圈往外擴" />
+    </figure>
+
     <p class="echo">訊號不會消失。它懸浮在宇宙中，越過時間與空間，是一切未說出口的問題的答案。</p>
 
     <footer class="mt-16 pt-8 border-t border-neutral-200">
@@ -81,7 +86,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   }
   .note .hero { margin: 2em 0 0.5em; text-align: center; }
   .note .hero img {
-    width: 50%;
+    width: 88%;
     height: auto;
     display: inline-block;
     border-radius: 8px;
@@ -95,7 +100,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     border-radius: 8px;
     border: 1px solid #e5e5e5;
   }
-  .note .inline img[src$="wall.jpg"] { width: 88%; }
+  .note .inline img[src$="wall.jpg"],
+  .note .inline img[src$="cosmos.jpg"] { width: 88%; }
   .note .inline figcaption {
     margin-top: 0.7em;
     text-align: center;
