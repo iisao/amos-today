@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>颱風路過 願您平安｜樂創媒體 LAFUN</title>
+<style>
+  /* 本地子集字體（只含本卡用到的字），離線也能正確渲染。
+     Noto Serif TC、Inter 皆為 SIL OFL 授權，允許子集化與自架。 */
+  @font-face {
+    font-family: "Noto Serif TC";
+    font-weight: 700;
+    src: url("./fonts/NotoSerifTC-700-subset.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Noto Serif TC";
+    font-weight: 900;
+    src: url("./fonts/NotoSerifTC-900-subset.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    src: url("./fonts/Inter-400-subset.woff2") format("woff2");
+  }
+  :root {
+    --green: #1a4d3a;
+    --green-soft: #2d6e54;
+    --ink: #f6f3ea;
+    --gold: #d9a441;
+    --seal: #b8402e;
+  }
+  html, body { margin: 0; padding: 0; background: #111; }
+  .card {
+    position: relative;
+    width: 1080px;
+    height: 1528px;
+    margin: 0 auto;
+    background: var(--green);
+    overflow: hidden;
+    font-family: "Noto Serif TC", "Songti TC", serif;
+  }
+  .card svg.bg {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+  /* 直書：逐字堆疊（此環境的網頁字型缺垂直度量，不能用 writing-mode） */
+  .zh {
+    position: absolute;
+    color: var(--ink);
+    text-align: center;
+    font-feature-settings: "palt" 1;
+  }
+  .zh > span { display: block; }
+  .zh-sub {
+    top: 128px;
+    right: 116px;
+    font-size: 104px;
+    font-weight: 700;
+    line-height: 1.42;
+  }
+  .zh-main {
+    top: 250px;
+    right: 396px;
+    font-size: 172px;
+    font-weight: 900;
+    line-height: 1.3;
+  }
+  .en {
+    position: absolute;
+    top: 226px;
+    left: 176px;
+    transform: rotate(90deg);
+    transform-origin: left top;
+    white-space: nowrap;
+    color: var(--ink);
+    opacity: 0.85;
+    font-family: "Inter", sans-serif;
+    font-size: 29px;
+    font-weight: 400;
+    letter-spacing: 0.36em;
+  }
+  .en-line {
+    position: absolute;
+    top: 176px;
+    left: 96px;
+    width: 116px;
+    height: 3px;
+    background: var(--gold);
+  }
+  .seal {
+    position: absolute;
+    right: 458px;
+    bottom: 212px;
+    width: 82px;
+    height: 146px;
+    background: var(--seal);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+  }
+  .seal span {
+    display: block;
+    color: var(--ink);
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.24;
+  }
+  .footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    text-align: center;
+    color: var(--ink);
+  }
+  .footer .brand {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-indent: 0.42em; /* balance the trailing letter-spacing */
+  }
+  .footer .site {
+    margin-top: 14px;
+    font-family: "Inter", sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.3em;
+    opacity: 0.62;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="bg" width="1080" height="1528" viewBox="0 0 1080 1528" id="bg"></svg>
+
+    <div class="en-line"></div>
+    <div class="en">Wish you have a nice day</div>
+
+    <div class="zh zh-sub">
+      <span>颱</span><span>風</span><span>路</span><span>過</span>
+    </div>
+    <div class="zh zh-main">
+      <span>願</span><span>您</span><span>平</span><span>安</span>
+    </div>
+
+    <div class="seal"><span>樂</span><span>創</span></div>
+
+    <div class="footer">
+      <div class="brand">樂創媒體 LAFUN</div>
+      <div class="site">lafun.media</div>
+    </div>
+  </div>
+
+<script>
+  // 底紋：青海波（seigaiha）——品牌綠疊淡白線，低對比。
+  // 右下：楓葉剪影，半透明米白，呼應原圖。
+  const SVG = "http://www.w3.org/2000/svg";
+  const bg = document.getElementById("bg");
+  const W = 1080, H = 1528;
+
+  const rect = document.createElementNS(SVG, "rect");
+  rect.setAttribute("width", W);
+  rect.setAttribute("height", H);
+  rect.setAttribute("fill", "#1a4d3a");
+  bg.appendChild(rect);
+
+  // Seigaiha: rows drawn top-to-bottom; each scale is a filled outer circle
+  // (background colour) with stroked concentric rings, so lower rows tuck
+  // underneath the row above.
+  const r = 62;
+  const strokeColor = "rgba(255,255,255,0.10)";
+  let rowIndex = 0;
+  for (let y = -r; y <= H + r; y += r / 2) {
+    const offset = rowIndex % 2 === 0 ? 0 : r / 2;
+    for (let x = -r + offset; x <= W + r; x += r) {
+      const g = document.createElementNS(SVG, "g");
+      [1, 0.78, 0.56, 0.34].forEach((k, i) => {
+        const c = document.createElementNS(SVG, "circle");
+        c.setAttribute("cx", x);
+        c.setAttribute("cy", y);
+        c.setAttribute("r", r * k);
+        c.setAttribute("stroke", strokeColor);
+        c.setAttribute("stroke-width", "2.4");
+        c.setAttribute("fill", i === 0 ? "#1a4d3a" : "none");
+        g.appendChild(c);
+      });
+      bg.appendChild(g);
+    }
+    rowIndex++;
+  }
+
+  // Maple leaf silhouette (512x512 box, stem at bottom)
+  const LEAF =
+    "M256 30l-46 89c-5 10-14 9-23 4l-33-17 25 132c5 25-12 25-21 14l-58-65-9 33" +
+    "c-1 4-6 9-12 8l-73-15 19 70c4 15 7 21-4 25l-26 12 125 106c5 4 8 11 6 18" +
+    "l-11 36c43-5 82-13 125-18 4 0 10 4 10 9l-6 121h21l-6-121c0-5 6-9 10-9" +
+    "c43 5 82 13 125 18l-11-36c-2-7 1-14 6-18l125-106-26-12c-11-4-8-10-4-25" +
+    "l19-70-73 15c-6 1-11-4-12-8l-9-33-58 65c-9 11-26 11-21-14l25-132-33 17" +
+    "c-9 5-18 6-23-4z";
+  const leaves = [
+    // [x, y, scale, rotate, opacity]
+    [830, 1180, 0.18, 15, 0.30],
+    [935, 1265, 0.23, -25, 0.34],
+    [760, 1305, 0.14, 40, 0.22],
+    [1005, 1150, 0.16, 65, 0.26],
+    [880, 1395, 0.19, -45, 0.30],
+    [990, 1335, 0.12, 10, 0.20],
+    [700, 1425, 0.11, -70, 0.16],
+    [790, 1105, 0.10, 90, 0.14],
+    [1012, 1455, 0.17, 30, 0.28],
+    [645, 1245, 0.09, -15, 0.12],
+    [905, 1080, 0.09, 120, 0.13],
+    [748, 1502, 0.13, 55, 0.20],
+    [1050, 1250, 0.11, -60, 0.18],
+  ];
+  leaves.forEach(([x, y, s, rot, op]) => {
+    const p = document.createElementNS(SVG, "path");
+    p.setAttribute("d", LEAF);
+    p.setAttribute("fill", "rgba(246,243,234," + op + ")");
+    p.setAttribute(
+      "transform",
+      `translate(${x} ${y}) rotate(${rot}) scale(${s}) translate(-256 -256)`
+    );
+    bg.appendChild(p);
+  });
+</script>
+</body>
+</html>
