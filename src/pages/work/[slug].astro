@@ -1,10 +1,8 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getProjects, renderPageBody } from "../../lib/notion";
-
-// Slugs that have a hand-made social share card at /work/<slug>/og.jpg.
-// Add a slug here when you create its og.jpg; otherwise BaseLayout uses og.png.
-const OG_CARDS = new Set(["olt-yuan-le-hao-shi"]);
 
 export async function getStaticPaths() {
   const projects = await getProjects();
@@ -17,7 +15,9 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const bodyHtml = await renderPageBody(project.id);
 
-const ogImage = OG_CARDS.has(project.slug) ? `/work/${project.slug}/og.jpg` : undefined;
+// 社群分享 OG 圖：有專屬卡 /work/<slug>/og.jpg（1200×630）就用，沒有則 BaseLayout 退回站台預設 /og.png。
+const ogCard = `/work/${project.slug}/og.jpg`;
+const ogImage = fs.existsSync(path.join(process.cwd(), "public", ogCard)) ? ogCard : undefined;
 ---
 
 <BaseLayout title={project.title} description={project.summary} image={ogImage} type="article">
