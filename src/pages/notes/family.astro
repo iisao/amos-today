@@ -1,0 +1,309 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// 世代軸：從渡海來台的第十世，到現在。
+// 每一代掛上已寫成的記事，沒寫的就先留空位。
+const generations = [
+  {
+    gen: "十",
+    who: "「書」字輩的祖先",
+    when: "渡海來台",
+    text: "族譜記在《蔡氏族譜資料草擬》裡：祖籍福建泉州府東石鎮西霞村，晉江蒲陽蔡氏十大房中的「銀爐房」，堂號清陽堂，這條線一路上溯到北宋的蔡襄。渡海過來的，是第十世。",
+    note: null,
+  },
+  {
+    gen: "十八",
+    who: "蔡拖",
+    when: "1926 - 2012",
+    text: "從雲林四湖箔子寮那個「上散赤」的漁村出發，一個人到羅東的木業腹地打拼，買下第一棟房子之後，才把妻兒從嘉義接過來團圓。建光、建榮、建誠，三間製材廠。名字刻在羅東高工的石板上。",
+    note: { slug: "cai-tuo", title: "蔡拖小傳", cover: "/notes/cai/feast.jpg" },
+  },
+  {
+    gen: "十九",
+    who: "蔡文堂",
+    when: "本名景堂",
+    text: "阿公買下那棟日式宅子時，日光燈剛普及，廳堂被照得富麗堂皇。他把那一刻的驕傲，寫進剛出生的三兒子的名字裡：景堂。那就是我父親。四十年前，他帶著我們住在東京。",
+    note: {
+      slug: "the-piece-i-choose",
+      title: "我剩下的是自選曲",
+      cover: "/notes/the-piece-i-choose/shinbashi-1986.jpg",
+    },
+  },
+  {
+    gen: "二十",
+    who: "蔡尚勲",
+    when: "我",
+    text: "出生在東京，讀到小學一年級才回台灣。二十三年前為了念書來到永和，去年把二十三年打包裝箱。指定曲彈完了，剩下的是自選曲。",
+    note: {
+      slug: "bridge-over-troubled-water",
+      title: "惡水上的大橋",
+      cover: "/notes/bridge-over-troubled-water/noodles.jpg",
+    },
+  },
+  {
+    gen: "二十一",
+    who: "下一棒",
+    when: "「期」字輩",
+    text: "阿公事務所裡尋出來的三台底片相機，一台是他的，一台是我年輕時玩的，現在輪到她。一卷三十六張，拍掉就沒了。",
+    note: {
+      slug: "your-own-way",
+      title: "活著的姿態",
+      cover: "/notes/your-own-way/cameras.jpg",
+    },
+  },
+];
+
+// 母系那一條。族譜不記，但一樣在。
+const maternal = {
+  slug: "grandma",
+  title: "記得外婆",
+  who: "黃藍阿惜",
+  when: "2026 清明・宜蘭員山福園",
+  cover: "/notes/grandma/young.jpg",
+  text: "族譜只記父系。外婆不在那串字輩裡，可是她在。",
+};
+
+const alsoRead = [
+  { slug: "always-with-you", title: "爸爸會一直陪著你", meta: "致盼盼 ｜ 五專志願那半小時" },
+  { slug: "your-memory-or-mine", title: "這是我的回憶，還是你的回憶", meta: "關於時間，和最捨不得錯過的那些臉" },
+];
+---
+
+<BaseLayout
+  title="家族"
+  description="從泉州的一個漁村，到雲林四湖的箔子寮，再到羅東的木頭與廳堂，然後是東京，然後是我。一條可以上溯的線。"
+  image="/notes/the-piece-i-choose/og.jpg"
+>
+  <section class="fam mx-auto max-w-3xl px-6 pt-24 pb-24">
+    <p class="kicker">我們來自何處？</p>
+    <h1 class="text-3xl sm:text-4xl font-medium leading-tight tracking-tight">
+      家族
+    </h1>
+    <p class="lead">
+      這個問題其實是有答案的。從泉州的一個漁村，到雲林四湖的箔子寮，再到羅東的木頭與廳堂，然後是東京，然後是我。
+    </p>
+    <p class="sub">
+      我把散在各處的照片、族譜、口述，一篇一篇寫下來放在這裡。不為了紀念誰，是因為這些東西如果沒有人寫，兩代之後就沒了。
+    </p>
+
+    <ol class="axis">
+      {generations.map((g) => (
+        <li class="node">
+          <div class="gen">
+            <span class="num">{g.gen}</span>
+            <span class="unit">世</span>
+          </div>
+          <div class="body">
+            <h2>{g.who}<span class="when">{g.when}</span></h2>
+            <p>{g.text}</p>
+            {g.note ? (
+              <a class="card" href={`/notes/${g.note.slug}`}>
+                <img src={g.note.cover} alt={g.note.title} />
+                <span>
+                  <em>記事</em>
+                  {g.note.title}
+                </span>
+              </a>
+            ) : (
+              <p class="pending">這一段還沒寫。</p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="maternal">
+      <h2 class="mh">另一條線</h2>
+      <p class="mt">{maternal.text}</p>
+      <a class="card wide" href={`/notes/${maternal.slug}`}>
+        <img src={maternal.cover} alt={maternal.title} />
+        <span>
+          <em>記事</em>
+          {maternal.title}
+          <b>{maternal.who} ｜ {maternal.when}</b>
+        </span>
+      </a>
+    </div>
+
+    <div class="also">
+      <h2 class="mh">寫給孩子的</h2>
+      <ul>
+        {alsoRead.map((a) => (
+          <li>
+            <a href={`/notes/${a.slug}`}>{a.title}</a>
+            <span>{a.meta}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <footer class="mt-16 pt-8 border-t border-neutral-200">
+      <a href="/notes" class="text-sm">← 回記事</a>
+    </footer>
+  </section>
+</BaseLayout>
+
+<style>
+  .fam { color: #262626; line-height: 1.9; }
+  .fam .kicker {
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 0.9rem;
+  }
+  .fam .lead {
+    font-size: 1.15rem;
+    line-height: 1.95;
+    color: #404040;
+    margin-top: 1.8rem;
+  }
+  .fam .sub { color: #737373; font-size: 0.95rem; margin-top: 1.1rem; }
+
+  /* 世代軸：一條貫穿的細線，每一代掛在上面 */
+  .fam .axis {
+    list-style: none;
+    margin: 3.4rem 0 0;
+    padding: 0;
+    position: relative;
+  }
+  .fam .axis::before {
+    content: "";
+    position: absolute;
+    left: 33px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      #d4d4d4 8%,
+      #d4d4d4 92%,
+      transparent
+    );
+  }
+  .fam .node {
+    position: relative;
+    display: flex;
+    gap: 1.6rem;
+    padding-bottom: 3.2rem;
+  }
+  .fam .gen {
+    flex: 0 0 66px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .fam .gen .num {
+    display: block;
+    font-size: 1.05rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: #fff;
+    padding: 0.35rem 0 0.1rem;
+  }
+  .fam .gen .unit {
+    display: block;
+    font-size: 0.7rem;
+    color: #a3a3a3;
+    letter-spacing: 0.2em;
+    background: #fff;
+    padding-bottom: 0.4rem;
+  }
+  .fam .body { flex: 1 1 auto; min-width: 0; }
+  .fam .body h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .fam .body h2 .when {
+    display: inline-block;
+    margin-left: 0.8em;
+    font-size: 0.8rem;
+    color: #a3a3a3;
+    letter-spacing: 0.06em;
+    font-weight: 400;
+  }
+  .fam .body p { margin-top: 0.8rem; font-size: 0.98rem; color: #404040; text-align: justify; }
+  .fam .pending { color: #a3a3a3; font-size: 0.9rem; }
+
+  /* 記事卡 */
+  .fam .card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.2rem;
+    padding: 0.7rem 1rem 0.7rem 0.7rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .fam .card:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+  .fam .card img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e5e5e5;
+    flex: 0 0 auto;
+  }
+  .fam .card span {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .fam .card em {
+    display: block;
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    margin-bottom: 0.15rem;
+  }
+  .fam .card b {
+    display: block;
+    font-weight: 400;
+    font-size: 0.82rem;
+    color: #a3a3a3;
+    margin-top: 0.15rem;
+  }
+  .fam .card.wide img { width: 96px; height: 96px; }
+
+  .fam .maternal { margin-top: 1.4rem; }
+  .fam .mh {
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #171717;
+    margin: 0 0 0.9rem;
+    padding-top: 2.4rem;
+    border-top: 1px solid #ededed;
+  }
+  .fam .mt { color: #404040; font-size: 0.98rem; margin-bottom: 1.2rem; }
+
+  .fam .also { margin-top: 1rem; }
+  .fam .also ul { list-style: none; padding: 0; margin: 0; }
+  .fam .also li { padding: 0.7rem 0; border-bottom: 1px solid #f5f5f5; }
+  .fam .also li a { font-size: 1rem; }
+  .fam .also li span {
+    display: block;
+    font-size: 0.82rem;
+    color: #a3a3a3;
+    margin-top: 0.2rem;
+  }
+
+  @media (max-width: 640px) {
+    .fam .axis::before { left: 25px; }
+    .fam .gen { flex-basis: 50px; }
+    .fam .node { gap: 1rem; padding-bottom: 2.6rem; }
+    .fam .card img { width: 60px; height: 60px; }
+    .fam .card.wide img { width: 72px; height: 72px; }
+  }
+</style>

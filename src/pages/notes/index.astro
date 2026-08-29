@@ -78,6 +78,20 @@ const notes = [
       寫給家人的、與工作無關的文字。
     </p>
 
+    <a href="/notes/family" class="famcard">
+      <div class="fc-imgs">
+        <img src="/notes/cai/feast.jpg" alt="蔡拖" />
+        <img src="/notes/the-piece-i-choose/shinbashi-1986.jpg" alt="1986 東京新橋" />
+        <img src="/notes/grandma/young.jpg" alt="外婆黃藍阿惜" />
+      </div>
+      <div class="fc-body">
+        <em>專題</em>
+        <h2>家族</h2>
+        <p>從泉州的一個漁村，到雲林四湖的箔子寮，再到羅東的木頭與廳堂，然後是東京，然後是我。一條可以上溯的線，第十世到第二十一世。</p>
+        <span>看世代軸 →</span>
+      </div>
+    </a>
+
     <ul class="mt-12 space-y-10">
       {notes.map((n) => (
         <li class="border-b border-neutral-100 pb-10">
@@ -100,3 +114,58 @@ const notes = [
     </ul>
   </section>
 </BaseLayout>
+
+<style>
+  .famcard {
+    display: block;
+    margin-top: 3rem;
+    padding: 1.4rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .famcard:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+  .famcard .fc-imgs { display: flex; gap: 0.5rem; }
+  .famcard .fc-imgs img {
+    width: 33.333%;
+    height: 92px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e5e5e5;
+  }
+  .famcard .fc-body { margin-top: 1.1rem; }
+  .famcard em {
+    display: block;
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    color: var(--color-accent);
+  }
+  .famcard h2 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin-top: 0.35rem;
+    letter-spacing: -0.01em;
+  }
+  .famcard p {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #737373;
+  }
+  .famcard span {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--color-accent);
+  }
+  @media (max-width: 640px) {
+    .famcard .fc-imgs img { height: 72px; }
+  }
+</style>
