@@ -79,9 +79,6 @@ const notes = [
     </p>
 
     <a href="/notes/family" class="famcard">
-      <figure class="fc-hero">
-        <img src="/notes/the-piece-i-choose/shinbashi-1986.jpg" alt="1986 年東京新橋，阿公、爸爸、媽媽與六歲的我" />
-      </figure>
       <div class="fc-body">
         <em>專題</em>
         <h2>家族</h2>
@@ -117,7 +114,7 @@ const notes = [
   .famcard {
     display: block;
     margin-top: 3rem;
-    padding: 1.4rem;
+    padding: 1.6rem 1.5rem;
     border: 1px solid #e5e5e5;
     border-radius: 12px;
     text-decoration: none;
@@ -129,15 +126,7 @@ const notes = [
     border-color: var(--color-accent);
     background: var(--color-accent-soft);
   }
-  .famcard .fc-hero { margin: 0; }
-  .famcard .fc-hero img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    border: 1px solid #e5e5e5;
-  }
-  .famcard .fc-body { margin-top: 1.1rem; }
+  .famcard .fc-body { margin-top: 0; }
   .famcard em {
     display: block;
     font-style: normal;
