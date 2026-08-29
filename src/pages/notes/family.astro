@@ -98,11 +98,9 @@ const alsoRead = [
             <p>{g.text}</p>
             {g.note ? (
               <a class="card" href={`/notes/${g.note.slug}`}>
-                <img src={g.note.cover} alt={g.note.title} />
-                <span>
-                  <em>記事</em>
-                  {g.note.title}
-                </span>
+                <em>記事</em>
+                <b>{g.note.title}</b>
+                <i>→</i>
               </a>
             ) : (
               <p class="pending">這一段還沒寫。</p>
@@ -116,12 +114,10 @@ const alsoRead = [
       <h2 class="mh">另一條線</h2>
       <p class="mt">{maternal.text}</p>
       <a class="card wide" href={`/notes/${maternal.slug}`}>
-        <img src={maternal.cover} alt={maternal.title} />
-        <span>
-          <em>記事</em>
-          {maternal.title}
-          <b>{maternal.who} ｜ {maternal.when}</b>
-        </span>
+        <em>記事</em>
+        <b>{maternal.title}</b>
+        <u>{maternal.who} ｜ {maternal.when}</u>
+        <i>→</i>
       </a>
     </div>
 
@@ -228,15 +224,15 @@ const alsoRead = [
   .fam .body p { margin-top: 0.8rem; font-size: 0.98rem; color: #404040; text-align: justify; }
   .fam .pending { color: #a3a3a3; font-size: 0.9rem; }
 
-  /* 記事卡 */
+  /* 記事卡：不用裁切縮圖，圖留在文章裡看 */
   .fam .card {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1.2rem;
-    padding: 0.7rem 1rem 0.7rem 0.7rem;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-top: 1.1rem;
+    padding: 0.75rem 1rem;
     border: 1px solid #e5e5e5;
-    border-radius: 10px;
+    border-radius: 8px;
     text-decoration: none;
     color: inherit;
     background: #fff;
@@ -246,35 +242,21 @@ const alsoRead = [
     border-color: var(--color-accent);
     background: var(--color-accent-soft);
   }
-  .fam .card img {
-    width: 72px;
-    height: 72px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #e5e5e5;
-    flex: 0 0 auto;
-  }
-  .fam .card span {
-    display: block;
-    font-size: 1rem;
-    line-height: 1.6;
-  }
   .fam .card em {
-    display: block;
     font-style: normal;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.2em;
     color: var(--color-accent);
-    margin-bottom: 0.15rem;
+    flex: 0 0 auto;
   }
-  .fam .card b {
-    display: block;
-    font-weight: 400;
-    font-size: 0.82rem;
-    color: #a3a3a3;
-    margin-top: 0.15rem;
+  .fam .card b { font-weight: 500; font-size: 1rem; color: #171717; }
+  .fam .card u { text-decoration: none; font-size: 0.8rem; color: #a3a3a3; }
+  .fam .card i {
+    font-style: normal;
+    margin-left: auto;
+    color: var(--color-accent);
+    flex: 0 0 auto;
   }
-  .fam .card.wide img { width: 96px; height: 96px; }
 
   .fam .maternal { margin-top: 1.4rem; }
   .fam .mh {
@@ -303,7 +285,7 @@ const alsoRead = [
     .fam .axis::before { left: 25px; }
     .fam .gen { flex-basis: 50px; }
     .fam .node { gap: 1rem; padding-bottom: 2.6rem; }
-    .fam .card img { width: 60px; height: 60px; }
-    .fam .card.wide img { width: 72px; height: 72px; }
+    .fam .card { flex-wrap: wrap; gap: 0.4rem 0.7rem; }
+    .fam .card i { margin-left: 0; }
   }
 </style>
